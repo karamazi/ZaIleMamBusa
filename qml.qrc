@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ScheduleData.qml</file>
+        <file>ScheduleItemView.qml</file>
+        <file>CurrentDateTimeRect.qml</file>
+        <file>ScheduleItemModel.js</file>
+        <file>data/RegularDayData.qml</file>
+        <file>data/SaturdayData.qml</file>
+        <file>data/SundayData.qml</file>
+    </qresource>
+</RCC>
