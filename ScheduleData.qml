@@ -19,26 +19,11 @@ Item {
         }
     }
 
-
-    function parsed(data, place){
-        var dates = []
-        for(var i=0;i<data.length;i++){
-            var d = new Date();
-            d.setHours(data[i][0])
-            d.setMinutes(data[i][1])
-            d.setMilliseconds(0);
-            dates.push(new Models.ScheduleModel(d, place));
-        }
-        return dates;
-    }
-    function byDate(a,b){
-       return a.date<b.date ? -1 : a.date===b.date ? 0 : 1
+    function notInPast(element, index, array){
+        return element.date >= currentDate;
     }
 
-    property var schedule: parsed(busData.mbm, "Ogrodowa")
-                           .concat(parsed(busData.koczwara, "MDA"))
-                           .sort(byDate);
-
+    property var schedule: busData.schedule.filter(notInPast);
 
     property int nextBusIndex: {
         console.log(schedule.length)
@@ -50,15 +35,13 @@ Item {
         return 5
     }
 
-    Component.onCompleted: {
-        var yesterday = new Date(currentDate.setDate(currentDate.getDate()-1));
-        console.log(currentDate, yesterday, currentDate-yesterday)
-    }
-
     Timer {
         running: true
         repeat: true
-        onTriggered: scheduleData.currentDate = new Date();
+        onTriggered: {
+            scheduleData.currentDate = new Date();
+        }
+
         interval: 1000
     }
 

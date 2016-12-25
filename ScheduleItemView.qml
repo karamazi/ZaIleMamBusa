@@ -2,15 +2,17 @@ import QtQuick 2.0
 
 Rectangle {
     id: scheduleItem
-    property date busTime
-    property string station
+    property var model
+    property var currentDate
     property bool isNext: false
+
 
     width: timeText.implicitWidth
     height: timeText.implicitHeight
 
-    color: isNext ? "darkmagenta" : "black"
-    opacity: scheduleData.currentDate > busTime ? 0.5 : 1
+    color: (currentDate && isNext) ? "darkmagenta" : "black"
+    opacity: (currentDate && currentDate > model.date) ? 0.5 : 1
+    Component.onCompleted: console.log(model.date)
 
     Text {
         id: timeText
@@ -19,7 +21,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         font.pointSize: 20
         color: "white"
-        text: scheduleItem.busTime.toLocaleString(Qt.locale("de_DE"), "HH:mm")
+        text: scheduleItem.model.date.toLocaleString(Qt.locale("de_DE"), "HH:mm")
         font.family: fontLato.name
     }
     Text {
@@ -33,7 +35,7 @@ Rectangle {
     }
     Text {
         id: leavePlaceText
-        text: scheduleItem.station
+        text: scheduleItem.model.station
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.verticalCenter: timeToLeave.verticalCenter
@@ -42,7 +44,10 @@ Rectangle {
     }
 
     function time2departure(){
-        var seconds = Math.floor((scheduleItem.busTime - scheduleData.currentDate)/1000);
+        if(!currentDate)
+            return ""
+
+        var seconds = Math.floor((scheduleItem.model.date - currentDate)/1000);
         if(seconds < 0){
             return "Pojechał"
         }

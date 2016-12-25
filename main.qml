@@ -8,35 +8,38 @@ ApplicationWindow {
     height: 640
     title: qsTr("Hello World")
 
-    ScheduleData {
-        id: scheduleData
-    }
 
     FontLoader {
         id: fontLato
         source: "assets/fonts/Lato-Regular.ttf"
     }
 
-    CurrentDateTimeRect {
-        id: header
-        currentDate: scheduleData.currentDate
-        z: 1
-    }
-    ListView {
+    Item {
+        id: content
         anchors {
-            top: header.bottom
-            bottom: parent.bottom
+            top: parent.top
+            bottom: switchButton.top
         }
         width: parent.width
 
-        snapMode: ListView.SnapToItem
-
-        model: scheduleData.schedule
-        delegate: ScheduleItemView {
-            width: parent.width
-            busTime: modelData.date
-            station: modelData.station
-            isNext: index == scheduleData.nextBusIndex
+        CurrentSchedule {
+            id: currentSchedule
+            anchors.fill: parent
         }
+
+        WeeklySchedule {
+            id: weeklySchedule
+            anchors.fill: parent
+            visible: !currentSchedule.visible
+        }
+
+    }
+
+    Button {
+        id: switchButton
+        text: currentSchedule.visible ? "Zobacz całościowo." : "Zobacz najbliższe."
+        anchors.bottom: parent.bottom
+        width: parent.width
+        onClicked: currentSchedule.visible = !currentSchedule.visible
     }
 }

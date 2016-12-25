@@ -8,5 +8,8 @@
         <file>data/RegularDayData.qml</file>
         <file>data/SaturdayData.qml</file>
         <file>data/SundayData.qml</file>
+        <file>CurrentSchedule.qml</file>
+        <file>WeeklySchedule.qml</file>
+        <file>data/BaseData.qml</file>
     </qresource>
 </RCC>

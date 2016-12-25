@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
-Item {
-    property var koczwara: [
+BaseData {
+    koczwara: [
         [5,45],
         [6,00], [6,10], [6,55],
         [7,10], [7,30],
@@ -20,7 +20,7 @@ Item {
         [22,10]
     ]
 
-    property var mbm: [
+    mbm: [
         [6,30], [6,45],
         [7,40], [7,50],
         [8,10],
