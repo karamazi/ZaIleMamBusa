@@ -4,7 +4,7 @@ Rectangle {
     id: dateTimeRect
     property var currentDate
 
-    color: "darkgreen"
+    color: "lightblue"
     height: (todayDayText.implicitHeight + todaysTimeText.implicitHeight) * 1.1
     width: parent.width
 

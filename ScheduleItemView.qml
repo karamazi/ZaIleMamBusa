@@ -8,11 +8,10 @@ Rectangle {
 
 
     width: timeText.implicitWidth
-    height: timeText.implicitHeight
+    height: timeText.implicitHeight * 1.5
 
-    color: (currentDate && isNext) ? "darkmagenta" : "black"
-    opacity: (currentDate && currentDate > model.date) ? 0.5 : 1
-    Component.onCompleted: console.log(model.date)
+    color: (currentDate && isNext) ? "#99c0ff" : (index % 2 == 0 ? "white" : "#dbe8fc")
+    opacity: (currentDate && currentDate > model.date) ? 0.4 : 1
 
     Text {
         id: timeText
@@ -20,7 +19,7 @@ Rectangle {
         anchors.leftMargin: 20
         anchors.verticalCenter: parent.verticalCenter
         font.pointSize: 20
-        color: "white"
+        color: "black"
         text: scheduleItem.model.date.toLocaleString(Qt.locale("de_DE"), "HH:mm")
         font.family: fontLato.name
     }
@@ -29,7 +28,7 @@ Rectangle {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: timeText.right
         anchors.leftMargin: 10
-        color: "white"
+        color: "black"
         text: time2departure()
         font.pointSize: 10
     }
@@ -39,7 +38,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.verticalCenter: timeToLeave.verticalCenter
-        color: "white"
+        color: "black"
         font.pointSize: 10
     }
 

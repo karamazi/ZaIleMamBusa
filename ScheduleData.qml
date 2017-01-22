@@ -5,6 +5,8 @@ import "ScheduleItemModel.js" as Models
 Item {
     id: scheduleData
     property date currentDate: new Date();
+    property int offsetHours: 1
+    property int offset: offsetHours * 3600 * 1000;
     property int dayOfTheWeek: currentDate.getDay()
 
     property alias busData: dataLoader.item
@@ -20,13 +22,12 @@ Item {
     }
 
     function notInPast(element, index, array){
-        return element.date >= currentDate;
+        return (element.date - currentDate) >= -offset;
     }
 
     property var schedule: busData.schedule.filter(notInPast);
 
     property int nextBusIndex: {
-        console.log(schedule.length)
         for(var i=0;i<schedule.length;i++){
             if(schedule[i].date <= currentDate)
                 continue;

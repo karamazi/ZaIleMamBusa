@@ -41,5 +41,12 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         width: parent.width
         onClicked: currentSchedule.visible = !currentSchedule.visible
+
+        contentItem: Text {
+            font.pointSize: 20
+            font.family: fontLato.name
+            text: switchButton.text
+            horizontalAlignment: Text.AlignHCenter
+        }
     }
 }
