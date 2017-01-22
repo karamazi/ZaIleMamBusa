@@ -6,7 +6,7 @@ ApplicationWindow {
     visible: true
     width: 360
     height: 640
-    title: qsTr("Hello World")
+    title: qsTr("Wolbrom-Krakow")
 
 
     FontLoader {
